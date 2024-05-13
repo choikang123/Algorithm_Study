@@ -7,7 +7,7 @@ graph=[]
 for i in range(n):
     graph.append(list(map(int,input().rstrip())))
 
-def dfs(x,y):
+def bfs(x,y):
     dx=[0,0,-1,1]
     dy=[1,-1,0,0]
 
@@ -23,7 +23,7 @@ def dfs(x,y):
                 queue.append([nx,ny])
                 graph[nx][ny]=graph[x][y]+1
                 
-dfs(0,0)
+bfs(0,0)
 #dfs(1,1)이라고 처음에 실행했는데 주의
 print(graph[n-1][m-1])
 #graph[nx-1][ny-1]이라고 썼는데 함수 안에서 쓴 변수는

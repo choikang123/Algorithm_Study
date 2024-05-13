@@ -16,7 +16,7 @@ def bfs(s,e):
     visited=[0]*(n+1) # 각 정점까지의 거리를 저장할 리스트
     q=deque()
     q.append(s) # q.append([s]) 리스트로 저장하는게 아님 정점으로 저장 헷갈리지 않기
-    visited[s]=1
+    visited[s]=1 #
 
     while q:
         s=q.popleft()
