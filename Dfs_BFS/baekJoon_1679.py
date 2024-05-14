@@ -19,7 +19,7 @@ def bfs(n,k):
             break
 
         for i in (n-1,n+1,n*2):
-            if not visited[i] and 0<=i<=max:
+            if 0<=i<=max and not visited[i]: ## 범위체크 항상 먼저 해주기 중요!!
                 q.append(i)
                 visited[i]=1+visited[n]
 print(bfs(n,k))
