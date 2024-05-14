@@ -1,7 +1,7 @@
 import sys
 from collections import deque
 input = sys.stdin.readline
-
+#촌수 계산
 n=int(input())
 graph=[[] for _ in range(n+1)]
 s,e=map(int,input().split())

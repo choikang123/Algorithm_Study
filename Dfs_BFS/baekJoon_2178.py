@@ -1,7 +1,7 @@
 import sys
 from collections import deque
 input=sys.stdin.readline
-
+# 미로탐색
 n,m=map(int,input().split())
 graph=[]
 for i in range(n):
