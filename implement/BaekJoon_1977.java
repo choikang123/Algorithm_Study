@@ -16,8 +16,7 @@ public class BaekJoon_1977 {
                 }
                 sum += pow;
             }
-
-
+            
         }
         if (sum == 0) {
             System.out.println(-1);
