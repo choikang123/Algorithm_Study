@@ -36,3 +36,14 @@ for _ in range(t):
                 bfs(i, j, graph)
                 cnt += 1
     print(cnt)
+
+
+
+//count = count + n//coin
+count=count+1260//500
+count = 2
+n=1260%500 //1260을 500으로 나눈 나머지
+n=260
+
+// 4=2+ 260//100
+count=4
