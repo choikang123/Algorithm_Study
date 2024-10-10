@@ -29,6 +29,7 @@ def quicksort(arr, start, end):
     
     # 
     while l <= r:
+        # 만약 이 조건이 없으면 배열의 범위를 넘어서 인덱스 에러가 발생할 수 있겠죠.
         while l <= end and arr[l] <= arr[pivot_index]:  
             l += 1
         while start < r and arr[r] >= arr[pivot_index]:
