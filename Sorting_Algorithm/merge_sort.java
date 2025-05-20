@@ -1,5 +1,8 @@
+/*
 #https://chatgpt.com/share/3c93a673-13b7-4828-898e-0eda883308a2
 # 퀵정렬 알고리즘과 병합정렬 알고리즘의 차이를 알려줌
+*//*
+
 
 import java.util.Arrays;
 
@@ -49,3 +52,4 @@ public class MergeSort {
         return sortedArr;
     }
 }
+*/

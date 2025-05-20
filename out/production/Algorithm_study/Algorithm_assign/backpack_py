@@ -1,0 +1,47 @@
+# 입력 받기
+n = int(input())  # 물건의 개수
+
+# 물건들의 정보를 저장할 리스트
+items = []  # (가치/무게 비율, 인덱스, 무게, 가치)를 저장할 리스트
+
+# 물건 정보 입력 받기
+for i in range(n):
+    w, v = map(int, input().split())
+    ratio = v / w  # 단위 무게당 가치 계산
+    items.append((ratio, i, w, v))
+
+# 배낭 용량 입력
+capacity = int(input())
+
+# ratio를 기준으로 내림차순 정렬
+items.sort(reverse=True)  # ratio가 첫 번째 원소이므로 자동으로 ratio 기준 정렬
+
+total_value = 0
+remaining_capacity = capacity
+result = []  # (index, fraction) 튜플을 저장할 리스트
+
+# 정렬된 순서대로 물건 처리
+for ratio, idx, weight, value in items:
+    if remaining_capacity == 0:
+        break
+        
+    # 전체 물건을 넣을 수 있는 경우
+    if weight <= remaining_capacity:
+        fraction = 1.0
+        total_value += value
+        remaining_capacity -= weight
+    # 일부만 넣을 수 있는 경우
+    else:
+        fraction = remaining_capacity / weight
+        total_value += value * fraction
+        remaining_capacity = 0
+        
+    result.append((idx, fraction))
+
+# 인덱스 기준으로 결과 정렬
+result.sort()
+
+# 결과 출력
+for index, fraction in result:
+    print(f"{index} {fraction:.1f}")
+print(int(total_value))

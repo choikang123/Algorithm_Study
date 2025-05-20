@@ -1,51 +1,77 @@
-import sys
-input = sys.stdin.readline
+from collections import defaultdict, deque
 
-k = int(input())
-x, y = map(int, input().split())
+def has_eulerian_path(N, edges):
+    # 그래프 구성
+    graph = defaultdict(list)
+    degree = [0] * (N + 1)
+    
+    # 간선 정보 추가 및 차수 계산
+    for u, v in edges:
+        graph[u].append(v)
+        graph[v].append(u)
+        degree[u] += 1
+        degree[v] += 1
+    
+    # 홀수 차수를 가진 정점의 개수 세기
+    odd_degree_count = sum(1 for i in range(1, N + 1) if degree[i] % 2 != 0)
+    
+    # 그래프에 간선이 있는지 확인
+    has_edges = any(degree[i] > 0 for i in range(1, N + 1))
+    
+    # 간선이 없는 경우 (문제 조건에 따라 T 반환)
+    if not has_edges:
+        return True
+    
+    # 그래프가 연결되어 있는지 확인
+    if not is_connected(N, graph, degree):
+        return False
+    
+    # 오일러 경로 조건:
+    # 1. 홀수 차수를 가진 정점이 정확히 0개 또는 2개여야 함
+    return odd_degree_count == 0 or odd_degree_count == 2
 
-num = 0
-length = pow(2, k)
-data = [[0] * length for _ in range(length)]
-data[y- 1][x- 1] = -1
-
-def checkHole(x, y, length):
-    for i in range(x, x + length):
-        for j in range(y, y + length):
-            if data[i][j] != 0:
-                return False
+def is_connected(N, graph, degree):
+    # 차수가 0보다 큰 첫 번째 정점 찾기
+    start = next((i for i in range(1, N + 1) if degree[i] > 0), -1)
+    
+    # 간선이 없는 경우
+    if start == -1:
+        return True
+    
+    # BFS로 연결된 모든 정점 방문
+    visited = [False] * (N + 1)
+    queue = deque([start])
+    visited[start] = True
+    
+    while queue:
+        node = queue.popleft()
+        
+        for neighbor in graph[node]:
+            if not visited[neighbor]:
+                visited[neighbor] = True
+                queue.append(neighbor)
+    
+    # 모든 차수가 0보다 큰 정점이 방문되었는지 확인
+    for i in range(1, N + 1):
+        if degree[i] > 0 and not visited[i]:
+            return False
+    
     return True
 
-def tromino(x, y, length):
-    global num
-    num += 1
-    halfLen = length // 2
+def main():
+    # 입력 받기
+    N, M = map(int, input().split())
+    edges = []
+    
+    for _ in range(M):
+        u, v = map(int, input().split())
+        edges.append((u, v))
+    
+    # 오일러 경로 존재 여부 확인
+    result = "T" if has_eulerian_path(N, edges) else "F"
+    
+    # 결과 출력
+    print(result)
 
-    # 각 구역에 대한 타일링
-    if checkHole(x, y, halfLen):
-        data[x + halfLen - 1][y + halfLen - 1] = num
-    if checkHole(x, y + halfLen, halfLen):
-        data[x + halfLen - 1][y + halfLen] = num
-    if checkHole(x + halfLen, y, halfLen):
-        data[x + halfLen][y + halfLen - 1] = num
-    if checkHole(x + halfLen, y + halfLen, halfLen):
-        data[x + halfLen][y + halfLen] = num
-        
-    # 더 이상 분할할 수 없으면 종료
-    if halfLen <= 1:  # 변경된 부분
-        return
-
-    # 재귀 호출로 4개의 구역에 대해 타일링 수행
-    tromino(x, y, halfLen)
-    tromino(x, y + halfLen, halfLen)
-    tromino(x + halfLen, y, halfLen)
-    tromino(x + halfLen, y + halfLen, halfLen)
-
-# 트로미노 타일링 시작
-tromino(0, 0, length)
-
-# 결과 출력
-for i in range(length):
-    for j in range(length):
-        print(data[i][j], end=' ')
-    print()
+if __name__ == "__main__":
+    main()

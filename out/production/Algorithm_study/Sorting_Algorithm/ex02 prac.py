@@ -8,3 +8,8 @@ for i in range(1,len(arr)):
     else:
       break
 print(arr) 
+
+# 이미 정렬된 상태라면 퀵정렬보다 삽입정렬이 훨씬 빠름
+
+
+# 

@@ -1,0 +1,35 @@
+import sys
+input=sys.stdin.readline
+n=int(input())
+cards=list(map(int,input().split()))
+cards.sort()
+
+m=int(input())
+candidate=list(map(int,input().split()))
+
+count={} # count라는 딕셔너리 생성
+# cards에서 하나씩 꺼내서 그 수와 갯수를 딕셔너리에 저장해주기
+for card in cards:
+  if card in count:
+    count[card]+=1
+  else:
+    count[card]=1
+
+def binary_search(arr,target,start,end):
+  if start>end:
+    return 0
+  
+  mid=(start+end)//2
+
+
+for target in candidate:
+  print(binary_search(cards,,target,0,len(cards)), end=" ")
+
+# n=10
+# cards=-10 -10 2 3 3 6 7 10 10 10
+# m=8
+# candidate=10 9 -5 2 3 4 5 -10
+
+
+# 이진 탐색은 정렬된 배열에서 값을 찾는 데 매우 효율적이기 때문에, 
+# 이 코드에서는 cards 리스트가 정렬된 상태에서 빠르게 값이 있는지 확인하고 등장 횟수를 반환하기 위해 사용됩니다.
