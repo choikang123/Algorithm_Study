@@ -43,7 +43,18 @@ public class Bus {
                 }
             }
         }
+     /* 8 7
+        3 4
+        2 7
+        2 6
+        3 7
+        5 1
+        6 2
+        6 5
+        6
 
+        5 (6,2,5,7,1)
+        */
         System.out.println(count);
     }
 }

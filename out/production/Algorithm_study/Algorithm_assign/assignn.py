@@ -31,3 +31,6 @@ while queue:
 
 # 모든 연결된 지역을 방문한 후, 방문한 지역 수 출력
 print(count)
+
+
+
